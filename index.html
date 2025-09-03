@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My TypeScript Website</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-brand">MyWebsite</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Welcome to My TypeScript Website</h1>
+                <p>A modern website built with HTML, CSS, and TypeScript</p>
+                <button id="cta-button" class="cta-btn">Get Started</button>
+            </div>
+            <div class="hero-image">
+                <svg width="200" height="200" viewBox="0 0 200 200">
+                    <circle cx="100" cy="100" r="90" fill="#6c63ff" opacity="0.2" />
+                    <circle cx="100" cy="100" r="70" fill="#6c63ff" opacity="0.4" />
+                    <circle cx="100" cy="100" r="50" fill="#6c63ff" />
+                    <text x="100" y="110" text-anchor="middle" fill="white" font-size="18">TS</text>
+                </svg>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <h2>About Us</h2>
+            <p>We create beautiful websites using modern technologies like TypeScript.</p>
+            <div class="features">
+                <div class="feature">
+                    <h3>Responsive Design</h3>
+                    <p>Our websites look great on all devices.</p>
+                </div>
+                <div class="feature">
+                    <h3>TypeScript Powered</h3>
+                    <p>Type safety and better development experience.</p>
+                </div>
+                <div class="feature">
+                    <h3>Modern UI</h3>
+                    <p>Clean and intuitive user interfaces.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="counter" class="counter-section">
+            <h2>Interactive Counter</h2>
+            <div class="counter-container">
+                <button id="decrement" class="counter-btn">-</button>
+                <span id="count-value" class="count">0</span>
+                <button id="increment" class="counter-btn">+</button>
+            </div>
+            <p>This counter is powered by TypeScript!</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 My Website. Built with HTML, CSS & TypeScript.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
