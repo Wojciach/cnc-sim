@@ -60,6 +60,26 @@
             </div>
         </section>
 
+        <section id="simulator">
+            <div id="display-area">
+                <svg id="display-svg" width="400" height="400" viewBox="0 0 400 400">
+                    
+                    <rect width="400" height="400" fill="#f0f0f0" />
+                    <circle cx="0" cy="0" r="50" fill="#6c63ff" id="movable-circle" />
+                    <text x="200" y="220" text-anchor="middle" fill="white" font-size="16">Move Me</text>
+                    <line x1="200" y1="0" x2="200" y2="400" stroke-width="2" stroke="#000" />
+                    <line x1="0" y1="200" x2="400" y2="200" stroke-width="2" stroke="#000" />
+                    <polyline points="200,0 205,5 195,5" fill="#000" />
+
+                </svg>
+            </div>
+            <div id="g-code-input">
+                <textarea id="gcode" placeholder="Enter G-code here..."></textarea>
+                <button id="run-gcode">Run G-code</button>
+            </div>
+
+        </section>
+
         <section id="counter" class="counter-section">
             <h2>Interactive Counter</h2>
             <div class="counter-container">
@@ -75,6 +95,6 @@
         <p>&copy; 2023 My Website. Built with HTML, CSS & TypeScript.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>
