@@ -149,6 +149,10 @@ body {
     flex-direction: column;
 }
 
+#gcode {
+    width: 400px;
+}
+
 .counter-section {
     padding: 4rem 5%;
     text-align: center;
