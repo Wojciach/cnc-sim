@@ -1,5 +1,8 @@
-class Website {
-    constructor() {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var gcodeRunner_js_1 = require("./gcodeRunner.js");
+var Website = /** @class */ (function () {
+    function Website() {
         this.counterValue = 0;
         this.elements = {
             decrement: document.getElementById('decrement'),
@@ -8,32 +11,41 @@ class Website {
         };
         this.init();
     }
-    init() {
+    Website.prototype.init = function () {
         this.setupEventListeners();
         this.setupNavbar();
-    }
-    setupEventListeners() {
+    };
+    Website.prototype.setupEventListeners = function () {
+        var _this = this;
         // Setup counter buttons
         if (this.elements.decrement) {
-            this.elements.decrement.addEventListener('click', () => this.updateCounter(-1));
+            this.elements.decrement.addEventListener('click', function () { return _this.updateCounter(-1); });
         }
         if (this.elements.increment) {
-            this.elements.increment.addEventListener('click', () => this.updateCounter(1));
+            this.elements.increment.addEventListener('click', function () { return _this.updateCounter(1); });
         }
         // CTA button event
-        const ctaButton = document.getElementById('cta-button');
+        var ctaButton = document.getElementById('cta-button');
         if (ctaButton) {
-            ctaButton.addEventListener('click', () => {
+            ctaButton.addEventListener('click', function () {
                 alert('Thanks for getting started with our website!');
             });
         }
+        // run g-code button event
+        var gCodeButton = document.getElementById('run-gcode');
+        if (gCodeButton) {
+            gCodeButton.addEventListener('click', function () {
+                console.log('g-code running...');
+                (0, gcodeRunner_js_1.runGCode)();
+            });
+        }
         // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const targetId = this.getAttribute('href');
+                var targetId = this.getAttribute('href');
                 if (targetId && targetId !== '#') {
-                    const targetElement = document.querySelector(targetId);
+                    var targetElement = document.querySelector(targetId);
                     if (targetElement) {
                         targetElement.scrollIntoView({
                             behavior: 'smooth'
@@ -42,36 +54,36 @@ class Website {
                 }
             });
         });
-    }
-    updateCounter(change) {
-        console.log(`Counter changed by: ${change}`);
+    };
+    Website.prototype.updateCounter = function (change) {
+        var _this = this;
+        console.log("Counter changed by: ".concat(change));
         this.counterValue += change;
         if (this.elements.count) {
             this.elements.count.textContent = this.counterValue.toString();
             // Add animation effect
             this.elements.count.classList.add('pop');
-            setTimeout(() => {
-                if (this.elements.count) {
-                    this.elements.count.classList.remove('pop');
+            setTimeout(function () {
+                if (_this.elements.count) {
+                    _this.elements.count.classList.remove('pop');
                 }
             }, 300);
         }
-    }
-    setupNavbar() {
-        const burger = document.querySelector('.burger');
-        const nav = document.querySelector('.nav-links');
+    };
+    Website.prototype.setupNavbar = function () {
+        var burger = document.querySelector('.burger');
+        var nav = document.querySelector('.nav-links');
         if (burger && nav) {
-            burger.addEventListener('click', () => {
+            burger.addEventListener('click', function () {
                 nav.classList.toggle('nav-active');
                 // Burger animation
                 burger.classList.toggle('toggle');
             });
         }
-    }
-}
+    };
+    return Website;
+}());
 // Initialize the website when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function () {
     new Website();
 });
-export {};
-//# sourceMappingURL=script.js.map

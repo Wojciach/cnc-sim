@@ -147,6 +147,7 @@ body {
 #g-code-input {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
 }
 
 #gcode {
@@ -265,4 +266,35 @@ footer {
 
 .toggle .line3 {
     transform: rotate(45deg) translate(-5px, -6px);
+}
+
+.activeModal {
+    color: lightgreen;
+}
+.inActiveModal {
+    color: lightblue;
+}
+
+#modal-functions {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 'x-small'
+}
+
+#current-spindle-position, #next-spindle-position, #active-base-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: small;
+    width: 300px;
+}
+
+#current-spindle-position span, #next-spindle-position span, #active-base-indicator span {
+    color: lightgreen;
+}
+
+#active-base-indicator #g {
+    color: #333;
 }

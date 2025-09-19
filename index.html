@@ -61,6 +61,10 @@
         </section>
 
         <section id="simulator">
+            <div>
+                <h2>Modal Functions:</h2>
+                <div id="modal-functions"></div>
+            </div>
             <div id="display-area">
                 <svg id="display-svg" width="400" height="400" viewBox="0 0 400 400">
                     <defs>
@@ -97,15 +101,30 @@
                     <rect x="0" y="0" width="400" height="400" fill="url(#dotPattern)" />
 
                     <!-- Y lines -->
-                    <rect x="195" y="0" width="10" height="400" fill="url(#y-linesPattern)" />
+                    <rect x="197.5" y="0" width="5" height="400" fill="url(#y-linesPattern)" />
                     <!-- X lines -->
-                    <rect x="0" y="195" width="400" height="10" fill="url(#x-linesPattern)" />
-
+                    <rect x="0" y="197.5" width="400" height="5" fill="url(#x-linesPattern)" />
+                    
+                    <circle id="active-base" cx="200" cy="200" r="5" fill="orange" />
                 </svg>
             </div>
             <div id="g-code-input">
-                <textarea id="gcode" placeholder="Enter G-code here..."></textarea>
+                <div id="modals"></div>
+                <div id="current-spindle-position">
+                    <h3>Current Spindle Position:</h3>
+                    <p id="position">X: <span id="x"> 0</span>, Y: <span id="y" >0</span>, Z: <span id="z"> 0</span></p>
+                </div>
+                <div id="next-spindle-position">
+                    <h3>Next Spindle Position:</h3>
+                    <p id="next-position">X: <span id="x"> 0</span>, Y: <span id="y" >0</span>, Z: <span id="z"> 0</span></p>
+                </div>
+                <div id="active-base-indicator">
+                    <h3>Active Base:</h3>
+                    <p><span id="g">G54</span>: X: <span id="x"> 0</span>, Y: <span id="y" >0</span>, Z: <span id="z"> 0</span></p>
+                </div>
+                <textarea id="gCodeString" placeholder="Enter G-code here..."></textarea>
                 <button id="run-gcode">Run G-code</button>
+                <button id="reset-modals">reset modals</button>
             </div>
 
         </section>
@@ -125,6 +144,6 @@
         <p>&copy; 2023 My Website. Built with HTML, CSS & TypeScript.</p>
     </footer>
 
-    <script type="module" src="script.js"></script>
+    <script type="module" src="./dist/script.js"></script>
 </body>
 </html>

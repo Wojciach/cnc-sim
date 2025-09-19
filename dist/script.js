@@ -1,23 +1,11 @@
 import { addDefaultModals } from './addDefaultModals.js';
 import { runGCode } from './gcodeRunner.js';
 import { modals, createDefaultModals } from './modals.js';
-import type { Modals } from './modals.js';
-import { setActiveModalFunctions }from "./setActiveModalFunctions.js";
-// script.ts - TypeScript source file
-interface CounterElements {
-    decrement: HTMLElement | null;
-    increment: HTMLElement | null;
-    count: HTMLElement | null;
-    resetModals: HTMLElement | null;
-    modalFunctions: HTMLElement | null;
-}
-
+import { setActiveModalFunctions } from "./setActiveModalFunctions.js";
 class Website {
-    private counterValue: number = 0;
-    private elements: CounterElements;
-    private modals: Modals = modals;
-
     constructor() {
+        this.counterValue = 0;
+        this.modals = modals;
         this.elements = {
             decrement: document.getElementById('decrement'),
             increment: document.getElementById('increment'),
@@ -25,36 +13,29 @@ class Website {
             resetModals: document.getElementById('reset-modals'),
             modalFunctions: document.getElementById('modal-functions')
         };
-
         this.init();
     }
-
-    private resetModals(): void {
+    resetModals() {
         this.modals = createDefaultModals();
         console.log('Modals reset to default:', this.modals);
     }
-
-    private init(): void {
+    init() {
         this.setupEventListeners();
         this.setupNavbar();
-        addDefaultModals(this.elements.modalFunctions!);
-        setActiveModalFunctions(this.elements.modalFunctions!);
+        addDefaultModals(this.elements.modalFunctions);
+        setActiveModalFunctions(this.elements.modalFunctions);
     }
-
-    private setupEventListeners(): void {
+    setupEventListeners() {
         // Setup counter buttons
         if (this.elements.decrement) {
             this.elements.decrement.addEventListener('click', () => this.updateCounter(-1));
         }
-
         if (this.elements.increment) {
             this.elements.increment.addEventListener('click', () => this.updateCounter(1));
         }
-
         if (this.elements.resetModals) {
             this.elements.resetModals.addEventListener('click', this.resetModals);
         }
-
         // CTA button event
         const ctaButton = document.getElementById('cta-button');
         if (ctaButton) {
@@ -67,14 +48,13 @@ class Website {
         if (gCodeButton) {
             gCodeButton.addEventListener('click', () => {
                 console.log('g-code running...');
-                const gCodeInput = document.getElementById('gCodeString') as HTMLInputElement;
+                const gCodeInput = document.getElementById('gCodeString');
                 runGCode(gCodeInput?.value ?? '');
             });
         }
-
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (this: HTMLElement, e: Event) {
+            anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
                 if (targetId && targetId !== '#') {
@@ -88,13 +68,11 @@ class Website {
             });
         });
     }
-
-    private updateCounter(change: number): void {
+    updateCounter(change) {
         console.log(`Counter changed by: ${change}`);
         this.counterValue += change;
         if (this.elements.count) {
             this.elements.count.textContent = this.counterValue.toString();
-            
             // Add animation effect
             this.elements.count.classList.add('pop');
             setTimeout(() => {
@@ -104,23 +82,20 @@ class Website {
             }, 300);
         }
     }
-
-    private setupNavbar(): void {
+    setupNavbar() {
         const burger = document.querySelector('.burger');
         const nav = document.querySelector('.nav-links');
-        
         if (burger && nav) {
             burger.addEventListener('click', () => {
                 nav.classList.toggle('nav-active');
-                
                 // Burger animation
                 burger.classList.toggle('toggle');
             });
         }
     }
 }
-
 // Initialize the website when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     new Website();
 });
+//# sourceMappingURL=script.js.map
