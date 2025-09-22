@@ -42,6 +42,10 @@ export const possibleModalValues = {
   F: ['F0', null] as const,
 };
 
+export const necessaryModals: (keyof Modals)[] = [
+    'G17', 'G20', 'G40', 'G49', 'G54', 'G90', 'G94', 'G96', 'M3', 'M7'
+];
+
 export function createDefaultModals(): Modals {
     return {
         G17: null,

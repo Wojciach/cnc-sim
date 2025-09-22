@@ -1,13 +1,17 @@
 import { updateActiveBase, updateSpindlePosition } from "./setActiveModalFunctions.js";
-import { singleCommandRunner } from "./singleCommandRunner.js";
+import { singleModalCommandRunner } from "./singleCommandRunner.js";
 import { checkForG10 } from "./checkForG10.js";
+import { lineValidation } from "./lineVlidation.js";
 export function runGCode(gCodeString) {
     const allLines = gCodeString.split(";");
     allLines.forEach((line, index) => {
-        const lineNoWhiteChars = line.replace(/\s/g, '');
-        const commandCodes = lineNoWhiteChars.match(/[MG]\d{1,2}/ig);
+        if (!lineValidation(line)) {
+            console.log(` - E R R O R :  I N  L I N E  ${index + 1} ! - `);
+            return;
+        }
+        const commandCodes = line.match(/[MG]\d{1,2}/ig);
         commandCodes?.forEach(command => {
-            singleCommandRunner(command);
+            singleModalCommandRunner(command);
         });
         checkForG10(line);
     });

@@ -18,6 +18,9 @@ export const possibleModalValues = {
     S: ['S0', null],
     F: ['F0', null],
 };
+export const necessaryModals = [
+    'G17', 'G20', 'G40', 'G49', 'G54', 'G90', 'G94', 'G96', 'M3', 'M7'
+];
 export function createDefaultModals() {
     return {
         G17: null,

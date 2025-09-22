@@ -1,2 +1,2 @@
-export declare function singleCommandRunner(modalCommand: string): void;
+export declare function singleModalCommandRunner(modalCommand: string): void;
 //# sourceMappingURL=singleCommandRunner.d.ts.map

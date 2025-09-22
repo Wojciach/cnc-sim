@@ -38,6 +38,7 @@ export declare const possibleModalValues: {
     S: readonly ["S0", null];
     F: readonly ["F0", null];
 };
+export declare const necessaryModals: (keyof Modals)[];
 export declare function createDefaultModals(): Modals;
 export declare const modals: Modals;
 type SpindlePosition = {

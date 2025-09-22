@@ -1,5 +1,5 @@
 import { modals, possibleModalValues, setModalIfValid } from "./modals.js";
-export function singleCommandRunner(modalCommand) {
+export function singleModalCommandRunner(modalCommand) {
     //checking if the command is in the possible modals list
     Object.keys(possibleModalValues).forEach(possibleModalValueKey => {
         const allPossibleValuesInThisModalType = possibleModalValues[possibleModalValueKey];
