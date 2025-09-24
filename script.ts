@@ -10,6 +10,9 @@ interface CounterElements {
     count: HTMLElement | null;
     resetModals: HTMLElement | null;
     modalFunctions: HTMLElement | null;
+    runGcode: HTMLElement | null;
+    gCodeInput: HTMLTextAreaElement | null;
+
 }
 
 class Website {
@@ -23,10 +26,20 @@ class Website {
             increment: document.getElementById('increment'),
             count: document.getElementById('count-value'),
             resetModals: document.getElementById('reset-modals'),
-            modalFunctions: document.getElementById('modal-functions')
+            modalFunctions: document.getElementById('modal-functions'),
+            runGcode: document.getElementById('run-gcode'),
+            gCodeInput: document.getElementById('gCodeString') as HTMLTextAreaElement
         };
 
         this.init();
+    }
+
+    private startSimulation(): void {
+        console.log('START SIMILATION - g-code running...');
+        if (this.elements.gCodeInput) {
+            console.log(this.elements.gCodeInput.value);
+            runGCode(this.elements.gCodeInput.value);
+        }
     }
 
     private resetModals(): void {
@@ -63,16 +76,13 @@ class Website {
             });
         }
         // run g-code button event
-        const gCodeButton = document.getElementById('run-gcode');
-        if (gCodeButton) {
-            gCodeButton.addEventListener('click', () => {
-                console.log('g-code running...');
-                const gCodeInput = document.getElementById('gCodeString') as HTMLInputElement;
-                runGCode(gCodeInput?.value ?? '');
-            });
+        // const gCodeButton = document.getElementById('run-gcode');
+        if (this.elements.runGcode) {
+            this.elements.runGcode.addEventListener('click', () => this.startSimulation() );
         }
+        
 
-        // Smooth scrolling for navigation links
+        //Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (this: HTMLElement, e: Event) {
                 e.preventDefault();
@@ -86,6 +96,14 @@ class Website {
                     }
                 }
             });
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                // Your code here
+                console.log('Enter key was pressed!');
+                this.startSimulation();
+            }
         });
     }
 
@@ -118,6 +136,7 @@ class Website {
             });
         }
     }
+    
 }
 
 // Initialize the website when DOM is loaded

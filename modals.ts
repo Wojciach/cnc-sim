@@ -1,4 +1,5 @@
 export interface Modals {
+    G00: 'G00' | 'G01' | 'G02' | 'G03' | null,
     G17: 'G17' | 'G18' | 'G19' | null,
     G20: 'G20' | 'G21' | null,
     G40: 'G40' | 'G41' | 'G42' | null,
@@ -22,6 +23,7 @@ export interface Modals {
 }
 
 export const possibleModalValues = {
+  G00: ['G00', 'G01', 'G02', 'G03', null] as const,
   G17: ['G17', 'G18', 'G19', null] as const,
   G20: ['G20', 'G21', null] as const,
   G40: ['G40', 'G41', 'G42', null] as const,
@@ -48,6 +50,7 @@ export const necessaryModals: (keyof Modals)[] = [
 
 export function createDefaultModals(): Modals {
     return {
+        G00: null,
         G17: null,
         G20: null,
         G40: null,
@@ -66,7 +69,7 @@ export function createDefaultModals(): Modals {
 
         H: null,
         T: null,
-        S: null,
+        S: 'S1000',
         F: null,
     };
 }

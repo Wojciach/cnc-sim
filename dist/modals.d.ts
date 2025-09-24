@@ -1,4 +1,5 @@
 export interface Modals {
+    G00: 'G00' | 'G01' | 'G02' | 'G03' | null;
     G17: 'G17' | 'G18' | 'G19' | null;
     G20: 'G20' | 'G21' | null;
     G40: 'G40' | 'G41' | 'G42' | null;
@@ -19,6 +20,7 @@ export interface Modals {
     F: string | number | null;
 }
 export declare const possibleModalValues: {
+    G00: readonly ["G00", "G01", "G02", "G03", null];
     G17: readonly ["G17", "G18", "G19", null];
     G20: readonly ["G20", "G21", null];
     G40: readonly ["G40", "G41", "G42", null];
