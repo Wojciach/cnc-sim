@@ -1,7 +1,7 @@
 import { possibleModalValues } from './modals.js';
+// Function to dynamically create and add modal elements to a given HTML element (visual representation of modals)
 export const addDefaultModals = (element) => {
-    console.log("MODALS:", possibleModalValues);
-    console.log("ELEMENT:", element);
+    console.log("Adding default modals to the HTML element:", element);
     Object.keys(possibleModalValues).forEach(key => {
         const typedKey = key;
         const value = possibleModalValues[typedKey]; // Now type-safe
@@ -9,9 +9,12 @@ export const addDefaultModals = (element) => {
         divG.id = "id-" + key;
         divG.className = "modal-function-G";
         // Add opening bracket as text node
-        divG.appendChild(document.createTextNode("[ "));
+        const extraNameExplanation = (/^[STDHF]$/i.test(typedKey)) ? `${typedKey}: ` : "";
+        divG.appendChild(document.createTextNode(`${extraNameExplanation}[ `));
         // Filter out null values
-        const validValues = value ? value.filter(modalValue => modalValue !== null) : [];
+        // const validValues = value ? value.filter(modalValue => modalValue !== null) : [];
+        const validValues = Array.isArray(value) ? value.filter(modalValue => modalValue !== null)
+            : [];
         validValues.forEach((modalValue, index) => {
             const span = document.createElement('span');
             span.id = "spec-val-" + modalValue;

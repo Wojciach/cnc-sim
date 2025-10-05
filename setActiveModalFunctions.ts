@@ -1,8 +1,7 @@
-import type { Modals } from "./modals.js";
-import { addDefaultModals } from "./addDefaultModals.js";
-import {spindlePositon, modals, workCoordinateSystems } from './modals.js';
+import {spindlePositon, modals, workCoordinateSystems } from './modals.js';  
 
 export const setActiveModalFunctions = (element: HTMLElement): void => {
+
     const position = document.querySelector('#position');
     const xElement = position?.querySelector('#x');
     xElement!.textContent = spindlePositon.current.x.toString();
@@ -24,8 +23,6 @@ export const setActiveModalFunctions = (element: HTMLElement): void => {
 }
 
 export function updateActiveBase() {
-    console.log("Updating active base position to: ", workCoordinateSystems);
-    console.log("MODALS G54: ", modals.G54);
 
     const x = document.querySelector('#active-base-indicator #x');
     const y = document.querySelector('#active-base-indicator #y');
@@ -34,8 +31,6 @@ export function updateActiveBase() {
     const activeBase = modals.G54;
 
     if(workCoordinateSystems && x && y && z && activeBase) {
-        console.log('workCoordinateSystems[activeBase].toString()');
-        console.log(workCoordinateSystems[activeBase].toString());
         x.textContent = workCoordinateSystems[activeBase].x.toString();
         y.textContent = workCoordinateSystems[activeBase].y.toString();
         z.textContent = workCoordinateSystems[activeBase].z.toString();
@@ -43,7 +38,7 @@ export function updateActiveBase() {
 }
 
 export function updateSpindlePosition() {
-    console.log("Updating active base position to: ", spindlePositon.current);
+
     const activeBase = document.getElementById('active-base');
     if(activeBase) {
         activeBase.setAttribute('cx', (200 + spindlePositon.current.x).toString());

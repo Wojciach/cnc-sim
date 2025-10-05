@@ -1,10 +1,13 @@
+const OFSET_VALUES = [0, 1, 2, 4, 5, 6, 7, 8, 9, null] as const;
+type OfsetValues = typeof OFSET_VALUES[number];
+type AnyNumber = number | null;
 export interface Modals {
     G00: 'G00' | 'G01' | 'G02' | 'G03' | null,
     G17: 'G17' | 'G18' | 'G19' | null,
     G20: 'G20' | 'G21' | null,
     G40: 'G40' | 'G41' | 'G42' | null,
-    G49: 'G49' | 'G43' | 'G44' | null,
-    G50: 'G50' | 'G51' | null,
+    G43: 'G43' | 'G44' | 'G49' | null,
+    G50: 'G50' | 'G51' | null, // max spindle speed
     G54: 'G54' | 'G55' | 'G56' | 'G57' | 'G58' | 'G59' | null,
     G80: 'G80' | null,
     G90: 'G90' | 'G91' | null,
@@ -16,10 +19,21 @@ export interface Modals {
     M48: 'M48' | 'M49' | null,
     M30: 'M30' | null,
 
-    H: string | number | null,
-    T: string | number | null,
-    S: string | number | null,
-    F: string | number | null
+    H: OfsetValues,
+    D: OfsetValues,
+    T: OfsetValues,
+    S: number | null,
+    F: number | null
+}
+
+export type FeedAndSpeed = {
+    S: number | null,
+    F: number | null
+}
+
+export const feedAndSpeed: FeedAndSpeed = {
+    S: null,
+    F: null
 }
 
 export const possibleModalValues = {
@@ -27,25 +41,28 @@ export const possibleModalValues = {
   G17: ['G17', 'G18', 'G19', null] as const,
   G20: ['G20', 'G21', null] as const,
   G40: ['G40', 'G41', 'G42', null] as const,
-  G49: ['G49', 'G43', 'G44', null] as const,
-  G50: ['G50', 'G51', null] as const,
+  G43: ['G43', 'G44', 'G49', null] as const,
+  G50: ['G50', 'G51', null] as const, //
   G54: ['G54', 'G55', 'G56', 'G57', 'G58', 'G59', null] as const,
   G80: ['G80', null] as const,
   G90: ['G90', 'G91', null] as const,
   G94: ['G94', 'G95', null] as const,
   G96: ['G96', 'G97', null] as const,
+
   M3: ['M3', 'M4', 'M5', null] as const,
   M7: ['M7', 'M8', 'M9', null] as const,
   M48: ['M48', 'M49', null] as const,
   M30: ['M30', null] as const,
-  H: ['H0', null] as const, // Number types don't have predefined values
-  T: ['T0', null] as const,
-  S: ['S0', null] as const,
-  F: ['F0', null] as const,
+
+  H: OFSET_VALUES,
+  T: OFSET_VALUES,
+  D: OFSET_VALUES,
+  S: null as AnyNumber, // S and F can be any number or null
+  F: null as AnyNumber,
 };
 
 export const necessaryModals: (keyof Modals)[] = [
-    'G17', 'G20', 'G40', 'G49', 'G54', 'G90', 'G94', 'G96', 'M3', 'M7'
+    'G00','G17', 'G20', 'G40', 'G43', 'G54', 'G90', 'G94', 'G96', 'M3', 'M7'
 ];
 
 export function createDefaultModals(): Modals {
@@ -54,7 +71,7 @@ export function createDefaultModals(): Modals {
         G17: null,
         G20: null,
         G40: null,
-        G49: null,
+        G43: null,
         G50: null,
         G54: null,
         G80: null,
@@ -69,8 +86,10 @@ export function createDefaultModals(): Modals {
 
         H: null,
         T: null,
-        S: 'S1000',
+        D: null,
+        S: null,
         F: null,
+
     };
 }
 
@@ -105,9 +124,16 @@ export const workCoordinateSystems: WorkCoordinateSystems = {
 };
 
 // Helper function for type-safe assignment
-export function setModalIfValid<K extends keyof Modals>(key: K, value: string): void {
+// export function setModalIfValid<K extends keyof Modals>(key: K, value: string | number | null): void {
+//   const validValues = possibleModalValues[key];
+//   if (validValues.includes(value as any)) {
+//     modals[key] = value as Modals[K];
+//   }
+// }
+
+export function setModalIfValid<K extends keyof Modals>(key: K, value: string | number | null): void {
   const validValues = possibleModalValues[key];
-  if (validValues.includes(value as any)) {
+  if (Array.isArray(validValues) && validValues.includes(value as any)) {
     modals[key] = value as Modals[K];
   }
 }

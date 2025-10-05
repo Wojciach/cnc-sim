@@ -20,7 +20,6 @@ class Website {
     startSimulation() {
         console.log('START SIMILATION - g-code running...');
         if (this.elements.gCodeInput) {
-            console.log(this.elements.gCodeInput.value);
             runGCode(this.elements.gCodeInput.value);
         }
     }

@@ -12,7 +12,6 @@ interface CounterElements {
     modalFunctions: HTMLElement | null;
     runGcode: HTMLElement | null;
     gCodeInput: HTMLTextAreaElement | null;
-
 }
 
 class Website {
@@ -37,7 +36,6 @@ class Website {
     private startSimulation(): void {
         console.log('START SIMILATION - g-code running...');
         if (this.elements.gCodeInput) {
-            console.log(this.elements.gCodeInput.value);
             runGCode(this.elements.gCodeInput.value);
         }
     }

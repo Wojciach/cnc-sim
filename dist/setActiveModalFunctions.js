@@ -1,4 +1,3 @@
-import { addDefaultModals } from "./addDefaultModals.js";
 import { spindlePositon, modals, workCoordinateSystems } from './modals.js';
 export const setActiveModalFunctions = (element) => {
     const position = document.querySelector('#position');
@@ -18,22 +17,17 @@ export const setActiveModalFunctions = (element) => {
     updateSpindlePosition();
 };
 export function updateActiveBase() {
-    console.log("Updating active base position to: ", workCoordinateSystems);
-    console.log("MODALS G54: ", modals.G54);
     const x = document.querySelector('#active-base-indicator #x');
     const y = document.querySelector('#active-base-indicator #y');
     const z = document.querySelector('#active-base-indicator #z');
     const activeBase = modals.G54;
     if (workCoordinateSystems && x && y && z && activeBase) {
-        console.log('workCoordinateSystems[activeBase].toString()');
-        console.log(workCoordinateSystems[activeBase].toString());
         x.textContent = workCoordinateSystems[activeBase].x.toString();
         y.textContent = workCoordinateSystems[activeBase].y.toString();
         z.textContent = workCoordinateSystems[activeBase].z.toString();
     }
 }
 export function updateSpindlePosition() {
-    console.log("Updating active base position to: ", spindlePositon.current);
     const activeBase = document.getElementById('active-base');
     if (activeBase) {
         activeBase.setAttribute('cx', (200 + spindlePositon.current.x).toString());

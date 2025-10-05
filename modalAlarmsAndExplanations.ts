@@ -5,10 +5,11 @@ type ModalAlarmsAndExplanations = {
 };
 
 export const modalAlarmsAndExplanations: ModalAlarmsAndExplanations = {
+    G00: "G00 (type of movement) is not set. Please set it to ensure correct rapid movements of the machine.",
     G17: "G17 (XY plane selection) is not set. Please set it to ensure correct plane selection for machining operations.",
     G20: "G20 (Inch mode) is not set. Please set it to ensure the machine operates in the correct unit system.",
     G40: "G40 (Tool radius compensation off) is not set. Please set it to avoid unexpected tool path deviations.",
-    G49: "G49 (Tool length offset cancel) is not set. Please set it to ensure accurate tool length compensation.",
+    G43: "G49 (Tool length offset cancel) is not set. Please set it to ensure accurate tool length compensation.",
     G54: "G54 (Work coordinate system 1) is not set. Please set it to define the primary work coordinate system.",
     G90: "G90 (Absolute programming) is not set. Please set it to ensure all coordinates are interpreted correctly.",
     G94: "G94 (Feed per minute) is not set. Please set it to ensure the feed rate is applied correctly.",

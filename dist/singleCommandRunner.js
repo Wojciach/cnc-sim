@@ -1,8 +1,15 @@
+import { FS_checkAndRun } from "./FS_checkAndRun.js";
 import { modals, possibleModalValues, setModalIfValid } from "./modals.js";
 export function singleModalCommandRunner(modalCommand) {
+    //Chceck if the command is one of S of F and convert to number
+    FS_checkAndRun(modalCommand);
     //checking if the command is in the possible modals list
     Object.keys(possibleModalValues).forEach(possibleModalValueKey => {
         const allPossibleValuesInThisModalType = possibleModalValues[possibleModalValueKey];
+        // Type guard to ensure we're working with an array
+        if (!Array.isArray(allPossibleValuesInThisModalType)) {
+            return;
+        }
         // if there is no match in comand with possible comand from possible modal, skip to next possibleModalValueKey (do not anything)
         if (!(allPossibleValuesInThisModalType).some(oneOfGcodeFromThisType => oneOfGcodeFromThisType === modalCommand)) {
             return;

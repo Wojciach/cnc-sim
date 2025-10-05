@@ -1,9 +1,12 @@
+declare const OFSET_VALUES: readonly [0, 1, 2, 4, 5, 6, 7, 8, 9, null];
+type OfsetValues = typeof OFSET_VALUES[number];
+type AnyNumber = number | null;
 export interface Modals {
     G00: 'G00' | 'G01' | 'G02' | 'G03' | null;
     G17: 'G17' | 'G18' | 'G19' | null;
     G20: 'G20' | 'G21' | null;
     G40: 'G40' | 'G41' | 'G42' | null;
-    G49: 'G49' | 'G43' | 'G44' | null;
+    G43: 'G43' | 'G44' | 'G49' | null;
     G50: 'G50' | 'G51' | null;
     G54: 'G54' | 'G55' | 'G56' | 'G57' | 'G58' | 'G59' | null;
     G80: 'G80' | null;
@@ -14,17 +17,23 @@ export interface Modals {
     M7: 'M7' | 'M8' | 'M9' | null;
     M48: 'M48' | 'M49' | null;
     M30: 'M30' | null;
-    H: string | number | null;
-    T: string | number | null;
-    S: string | number | null;
-    F: string | number | null;
+    H: OfsetValues;
+    D: OfsetValues;
+    T: OfsetValues;
+    S: number | null;
+    F: number | null;
 }
+export type FeedAndSpeed = {
+    S: number | null;
+    F: number | null;
+};
+export declare const feedAndSpeed: FeedAndSpeed;
 export declare const possibleModalValues: {
     G00: readonly ["G00", "G01", "G02", "G03", null];
     G17: readonly ["G17", "G18", "G19", null];
     G20: readonly ["G20", "G21", null];
     G40: readonly ["G40", "G41", "G42", null];
-    G49: readonly ["G49", "G43", "G44", null];
+    G43: readonly ["G43", "G44", "G49", null];
     G50: readonly ["G50", "G51", null];
     G54: readonly ["G54", "G55", "G56", "G57", "G58", "G59", null];
     G80: readonly ["G80", null];
@@ -35,10 +44,11 @@ export declare const possibleModalValues: {
     M7: readonly ["M7", "M8", "M9", null];
     M48: readonly ["M48", "M49", null];
     M30: readonly ["M30", null];
-    H: readonly ["H0", null];
-    T: readonly ["T0", null];
-    S: readonly ["S0", null];
-    F: readonly ["F0", null];
+    H: readonly [0, 1, 2, 4, 5, 6, 7, 8, 9, null];
+    T: readonly [0, 1, 2, 4, 5, 6, 7, 8, 9, null];
+    D: readonly [0, 1, 2, 4, 5, 6, 7, 8, 9, null];
+    S: AnyNumber;
+    F: AnyNumber;
 };
 export declare const necessaryModals: (keyof Modals)[];
 export declare function createDefaultModals(): Modals;
@@ -89,6 +99,6 @@ type WorkCoordinateSystems = {
     };
 };
 export declare const workCoordinateSystems: WorkCoordinateSystems;
-export declare function setModalIfValid<K extends keyof Modals>(key: K, value: string): void;
+export declare function setModalIfValid<K extends keyof Modals>(key: K, value: string | number | null): void;
 export {};
 //# sourceMappingURL=modals.d.ts.map
