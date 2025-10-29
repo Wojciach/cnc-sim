@@ -34,7 +34,7 @@ class Website {
     }
 
     private startSimulation(): void {
-        console.log('START SIMILATION - g-code running...');
+        console.log('START SIMULATION - g-code running...');
         if (this.elements.gCodeInput) {
             runGCode(this.elements.gCodeInput.value);
         }

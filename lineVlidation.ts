@@ -11,7 +11,7 @@ export function lineValidation(line: string): boolean {
         return false;
     }
 
-    const ifSpindleStoped : boolean = modals.M3 === null || modals.M3 === 'M5';
+    const ifSpindleStoped : boolean = modals.M03 === null || modals.M03 === 'M05';
     const feedMovement : boolean = (line.match(/G0?[123]\b/ig) || []).length > 0;
     console.log(" - I F  S P I N D L E  S T O P E D : - ", ifSpindleStoped);
     console.log(" - I F  F E E D  M O V E M E N T : - ", feedMovement);
@@ -23,24 +23,5 @@ export function lineValidation(line: string): boolean {
         console.log(" - E R R O R :  Feed movement started with spindle stoped !");
         return false;
     }
-
-
-
-    // Function to check if all necessary modals are set
-    // const  areNecessaryModalsSet = (): boolean => {
-    //     return necessaryModals.every(key => modals[key] !== null);
-    // }
-    // areNecessaryModalsSet();
-
-    // if (!areNecessaryModalsSet()) {
-    //     console.log(" - E R R O R :  N E C E S S A R Y  M O D A L S  A R E  N O T  S E T ! - ");
-    //     necessaryModals.forEach(key => {
-    //         if (modals[key] === null) {
-    //             console.log(` - M I S S I N G  M O D A L :  ${key} ! - `);
-    //             console.log(` - ------- -   ${modalAlarmsAndExplanations[key]} ! - `);
-    //         }
-    //     })
-    // };
-    
     return true;
 }

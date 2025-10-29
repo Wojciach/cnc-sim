@@ -14,6 +14,6 @@ export const modalAlarmsAndExplanations: ModalAlarmsAndExplanations = {
     G90: "G90 (Absolute programming) is not set. Please set it to ensure all coordinates are interpreted correctly.",
     G94: "G94 (Feed per minute) is not set. Please set it to ensure the feed rate is applied correctly.",
     G96: "G96 (Constant surface speed) is not set. Please set it to maintain consistent cutting conditions.",
-    M3: "M3 (Spindle on clockwise) is not set. Please set it to start the spindle in the correct direction.",
-    M7: "M7 (Mist coolant on) is not set. Please set it to ensure proper cooling during machining operations."
+    M03: "M03 (Spindle on clockwise) is not set. Please set it to start the spindle in the correct direction.",
+    M07: "M07 (Mist coolant on) is not set. Please set it to ensure proper cooling during machining operations."
 }

@@ -13,8 +13,8 @@ export interface Modals {
     G90: 'G90' | 'G91' | null;
     G94: 'G94' | 'G95' | null;
     G96: 'G96' | 'G97' | null;
-    M3: 'M3' | 'M4' | 'M5' | null;
-    M7: 'M7' | 'M8' | 'M9' | null;
+    M03: 'M03' | 'M04' | 'M05' | null;
+    M07: 'M07' | 'M08' | 'M09' | null;
     M48: 'M48' | 'M49' | null;
     M30: 'M30' | null;
     H: OfsetValues;
@@ -36,12 +36,12 @@ export declare const possibleModalValues: {
     G43: readonly ["G43", "G44", "G49", null];
     G50: readonly ["G50", "G51", null];
     G54: readonly ["G54", "G55", "G56", "G57", "G58", "G59", null];
-    G80: readonly ["G80", null];
+    G80: readonly ["G73", "G74", "G76", "G80", "G81", "G82", "G83", "G84", "G85", "G86", null];
     G90: readonly ["G90", "G91", null];
     G94: readonly ["G94", "G95", null];
     G96: readonly ["G96", "G97", null];
-    M3: readonly ["M3", "M4", "M5", null];
-    M7: readonly ["M7", "M8", "M9", null];
+    M03: readonly ["M03", "M04", "M05", null];
+    M07: readonly ["M07", "M08", "M09", null];
     M48: readonly ["M48", "M49", null];
     M30: readonly ["M30", null];
     H: readonly [0, 1, 2, 4, 5, 6, 7, 8, 9, null];
@@ -53,17 +53,14 @@ export declare const possibleModalValues: {
 export declare const necessaryModals: (keyof Modals)[];
 export declare function createDefaultModals(): Modals;
 export declare const modals: Modals;
+export type Coordinate = {
+    x: number;
+    y: number;
+    z: number;
+};
 type SpindlePosition = {
-    current: {
-        x: number;
-        y: number;
-        z: number;
-    };
-    next: {
-        x: number;
-        y: number;
-        z: number;
-    };
+    current: Coordinate;
+    next: Coordinate;
 };
 export declare const spindlePositon: SpindlePosition;
 type WorkCoordinateSystems = {

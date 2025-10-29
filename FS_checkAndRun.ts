@@ -12,14 +12,8 @@ export function FS_checkAndRun(line: string): boolean {
     }
 
     if (match && (matchedLetter === 'S' || matchedLetter === 'F')) {
-        console.log(match)
-        console.log(` - ${matchedLetter} COMMAND DETECTED !!! - `);
-        console.log("Full match:", match[0]);  // "F111"
-        console.log("Matched letter:", matchedLetter);  // "F"
-        console.log("Captured number:", match[1]);  // "111"
         if (match[1]) {
             feedAndSpeed[matchedLetter] = Number(parseFloat(match[1]));
-            console.log(` - ${matchedLetter} VALUE SET TO: `, feedAndSpeed[matchedLetter], " - ");
             document.getElementById(`id-${matchedLetter}`)!.textContent = `${matchedLetter}: ` + feedAndSpeed[matchedLetter].toString();
         }
     }

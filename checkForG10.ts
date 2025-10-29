@@ -17,18 +17,22 @@ export function checkForG10(line: string): boolean {
 
         console.log(" - please do not use 'M' codes in the same line with G10 command - ");
         return false;
+
     } else if (((line.match(/(S)/ig)?.length ?? [].length ) > 0) ) {
 
         console.log(" - please do not use 'S' parameter in the same line with G10 command - ");
         return false;
+
     } else if (((line.match(/(T)/ig)?.length ?? [].length ) > 0) ) {
 
         console.log(" - please do not use 'T' parameter in the same line with G10 command - ");
         return false;
+
     } else if (((line.match(/(H)/ig)?.length ?? [].length ) > 0) ) {
 
         console.log(" - please do not use 'H' parameter in the same line with G10 command - ");
         return false;
+        
     } else if (((line.match(/(F)/ig)?.length ?? [].length ) > 0) ) {
 
         console.log(" - please do not use 'F' parameter in the same line with G10 command - ");

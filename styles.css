@@ -283,6 +283,28 @@ footer {
     font-size: 'x-small'
 }
 
+.modal-function-G-specific, .modal-function-G {
+    position: relative;
+}
+
+.g-code-explenation {
+    pointer-events: none; /* Disable pointer events for the span  xx ww*/
+    cursor: pointer;
+    opacity: 0.8;
+    top: 0;
+    left: 0;
+    overflow: auto;
+    text-wrap: nowrap;
+    position: absolute;
+    background-color: #444;
+    width: auto;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    z-index: 1000;
+    font-size: 9px;
+}
+
 #current-spindle-position, #next-spindle-position, #active-base-indicator {
     display: flex;
     align-items: center;

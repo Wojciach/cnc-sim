@@ -1,0 +1,1 @@
+{"version":3,"file":"gCodeExplanation.d.ts","sourceRoot":"","sources":["../gCodeExplanation.ts"],"names":[],"mappings":"AAAA,qBAAa,gBAAgB;IACzB,MAAM,CAAC,EAAE,CAAC,KAAK,EAAE,WAAW,EAAE,GAAG,EAAE,MAAM,GAAG,IAAI;IAUhD,MAAM,CAAC,GAAG,CAAC,IAAI,EAAE,WAAW,GAAG,IAAI;IAInC,MAAM,CAAC,IAAI,EAAE;QACT,CAAC,GAAG,EAAE,MAAM,GAAG,MAAM,CAAA;KACxB,CAyEA;CAEJ"}
