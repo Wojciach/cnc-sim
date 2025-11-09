@@ -12,7 +12,9 @@ import { generalSyntaxCheck } from "./generalSyntaxCheck.js";
 import { runAutonomusModals } from "./runAutonomusModals.js";
 import { checkForNecessaryModals } from "./checkForNecessaryModals.js";
 import { DealWithMovement } from "./dealWithMovement.js";
-import { ChechkNecessaryModalsForMovement } from "./chechkNecessaryModalsForMovement.js";
+import { CheckNecessaryModalsForMovement } from "./checkNecessaryModalsForMovement.js";
+import { chainOfCoordinates } from "./chainOfCoordinates.js";
+import { extractCoordinates } from "./extractCoordinates.js";
 //import { checkForSpidneRepositionLines } from "./checkForSpidneRepositionLines.js";
 export function runGCode(gCodeString) {
     const allLines = gCodeString.split(";");
@@ -27,14 +29,28 @@ export function runGCode(gCodeString) {
         const G10_Detetced = checkForG10(lineWithCommentsRemoved);
         if (G10_Detetced)
             return;
+        const pattern = /\b[MG]\d{1,2}\b|\b[XYZ]\s*[-+]?\d+\.?\d*\b|\b[FS]\s*\d+\.?\d*\b|\b[HTD]\s*\d{1,2}\b/gi;
+        const commandCodesOfThisLine = lineWithCommentsRemoved.match(pattern) || [];
+        console.log(" - C O M M A N D S  I N  L I N E : - ", commandCodesOfThisLine);
+        commandCodesOfThisLine.forEach(command => {
+            singleCommandRunner(command);
+        });
         const movementDetected = DealWithMovement.run(lineWithCommentsRemoved);
         if (movementDetected) {
-            ChechkNecessaryModalsForMovement.run(lineWithCommentsRemoved);
+            if (CheckNecessaryModalsForMovement.run(lineWithCommentsRemoved)) {
+                console.log(" - M O V E M E N T  P R O C E S S I N G  A P P R O V E D ! - ");
+                const newCoords = extractCoordinates(lineWithCommentsRemoved);
+                if (newCoords !== null) {
+                    chainOfCoordinates.push({ coord: newCoords, ijkr: { i: 0, j: 0, k: 0, r: 0 }, g: modals.G00 });
+                }
+            }
+            ;
+            console.log(" - E N D  O F  M O V E M E N T  P R O C E S S I N G ! - ");
+            console.log("--CC--HH--AA--II--NN-- OO--FF-- CC--OO--RR--DD--II--NN--AA--TT--EE--SS-- : ", chainOfCoordinates);
         }
         ;
-        const isMovementOk = checkForMovement(lineWithCommentsRemoved, index);
-        if (!isMovementOk)
-            return;
+        // const isMovementOk = checkForMovement(lineWithCommentsRemoved, index);
+        // if(!isMovementOk) return;
         return; ///STOP PROCESSING HERE TEMPORARILY FOR TESTING OTHER MODULE //////
         // check for G41/G42 line and process it here
         // SPECIAL LINE PROCESSING
@@ -45,12 +61,6 @@ export function runGCode(gCodeString) {
         const SF_CommnadsPrevalidation = FS_CommnadsPrevalidation(lineWithCommentsRemoved);
         if (!SF_CommnadsPrevalidation)
             return;
-        const pattern = /\b[MG]\d{1,2}\b|\b[XYZ]\s*[-+]?\d+\.?\d*\b|\b[FS]\s*\d+\.?\d*\b|\b[HTD]\s*\d{1,2}\b/gi;
-        const commandCodesOfThisLine = lineWithCommentsRemoved.match(pattern) || [];
-        console.log(" - C O M M A N D S  I N  L I N E : - ", commandCodesOfThisLine);
-        commandCodesOfThisLine.forEach(command => {
-            singleCommandRunner(command);
-        });
     });
     updateSpindlePosition();
     updateActiveBase();

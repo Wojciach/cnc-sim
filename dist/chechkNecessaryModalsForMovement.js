@@ -1,4 +1,4 @@
-export class ChechkNecessaryModalsForMovement {
+export class CheckNecessaryModalsForMovement {
     static run(line) {
         return true;
     }

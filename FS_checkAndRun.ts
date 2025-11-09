@@ -7,7 +7,7 @@ export function FS_checkAndRun(line: string): boolean {
     const match = line.match(pattern);
     const matchedLetter = match ? match[0].charAt(0).toUpperCase() : null;
     if (matchedLetter !== 'S' && matchedLetter !== 'F') {
-        console.log(" - WRONG  S  O R  F   C O M M A N D (wrong letter match whille interpreting SF command) ! - ");
+        //console.log(" - WRONG  S  O R  F   C O M M A N D (wrong letter match whille interpreting SF command) ! - ");
         return false;
     }
 

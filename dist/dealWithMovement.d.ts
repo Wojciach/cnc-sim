@@ -1,4 +1,4 @@
-import type { Coordinate } from "./modals";
+import type { Coordinate } from "./modals.js";
 export declare class DealWithMovement {
     static run(line: string): boolean;
     static detect(line: string): boolean;

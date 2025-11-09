@@ -2,7 +2,7 @@ import { workCoordinateSystems } from "./modals.js";
 export function checkForG10(line) {
     // Basic validation for G10 line structure
     if (line.match(/(G10)/ig) === null) {
-        console.log(" - G10  L I N E  N O T  D E T E C T E D ! - ");
+        // console.log(" - G10  L I N E  N O T  D E T E C T E D ! - ");
         return false;
     }
     else if (((line.match(/(G)/ig)?.length || [].length) > 1)) {

@@ -1,5 +1,11 @@
+import { chainOfCoordinates } from "./chainOfCoordinates.js";
 export function extractCoordinates(line) {
-    let coordinates = { x: 0, y: 0, z: 0 };
+    const lastCoords = chainOfCoordinates[chainOfCoordinates.length - 1];
+    let coordinates = {
+        x: lastCoords.coord.x,
+        y: lastCoords.coord.y,
+        z: lastCoords.coord.z
+    };
     const coordMovementMatch = line.match(/\b[XYZ]-?\d+\.?\d*\b/ig);
     if (coordMovementMatch !== null && coordMovementMatch.length > 0) {
         console.log(" - P R O P E R  C O O R D I N A T E S  F O U N D  I N  L I N E ! - ");
@@ -11,13 +17,13 @@ export function extractCoordinates(line) {
     var cords = Object.keys(coordinates);
     cords.forEach((cord) => {
         const regEx = new RegExp(`${cord}(-?\\d+\\.?\\d*)`, `ig`);
-        const c = [...line.matchAll(regEx)];
+        const c = [...line.matchAll(regEx)]; //getting digits values for this cord
         if (c.length === 0) {
-            console.log("### no matches for " + cord);
+            console.log("### no value number for " + cord);
             return; // No matches found, skip this cord
         }
         else if (c.length > 0) {
-            const lastMatch = c[c.length - 1];
+            const lastMatch = c[c.length - 1]; // in case there are more than one coordinate for this cord in line, take the last one
             const valueString = lastMatch[1] || 0;
             const valueNumber = Number(valueString);
             coordinates[cord] = valueNumber;

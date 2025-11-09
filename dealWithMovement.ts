@@ -1,5 +1,5 @@
-import { extractCoordinates } from "./extractCoordinates";
-import type { Coordinate } from "./modals";
+import { extractCoordinates } from "./extractCoordinates.js";
+import type { Coordinate } from "./modals.js";
 
 export class DealWithMovement {
     public static run(line: string): boolean {
@@ -10,7 +10,7 @@ export class DealWithMovement {
                 }
             };
         }
-        return true;
+        return false;
     }
 
     static detect(line: string): boolean {

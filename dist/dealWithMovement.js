@@ -1,4 +1,4 @@
-import { extractCoordinates } from "./extractCoordinates";
+import { extractCoordinates } from "./extractCoordinates.js";
 export class DealWithMovement {
     static run(line) {
         if (this.detect(line)) {
@@ -9,7 +9,7 @@ export class DealWithMovement {
             }
             ;
         }
-        return true;
+        return false;
     }
     static detect(line) {
         if ((/[XYZ]/ig.test(line))) {

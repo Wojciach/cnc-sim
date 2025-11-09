@@ -1,1 +1,1 @@
-{"version":3,"file":"chechkNecessaryModalsForMovement.d.ts","sourceRoot":"","sources":["../chechkNecessaryModalsForMovement.ts"],"names":[],"mappings":"AAAA,qBAAa,gCAAgC;WAC3B,GAAG,CAAC,IAAI,EAAE,MAAM,GAAG,OAAO;IAKxC,MAAM,CAAC,qBAAqB,CAAC,IAAI,EAAE,MAAM,GAAG,IAAI;CAGnD"}
+{"version":3,"file":"chechkNecessaryModalsForMovement.d.ts","sourceRoot":"","sources":["../chechkNecessaryModalsForMovement.ts"],"names":[],"mappings":"AAAA,qBAAa,+BAA+B;WAC1B,GAAG,CAAC,IAAI,EAAE,MAAM,GAAG,OAAO;IAKxC,MAAM,CAAC,qBAAqB,CAAC,IAAI,EAAE,MAAM,GAAG,IAAI;CAGnD"}
