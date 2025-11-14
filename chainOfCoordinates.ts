@@ -1,8 +1,8 @@
 import type { Coordinate, Modals } from "./modals.js";
 
-type ijkr = {i: number, j: number, k: number, r: number};
+export type ijkr = {i: number, j: number, k: number, r: number};
 
-type fullCoordInfo = {coord: Coordinate, ijkr: ijkr,  g: Modals['G00']};
+export type fullCoordInfo = {coord: Coordinate, ijkr: ijkr,  g: Modals['G00']};
 
 export const chainOfCoordinates: fullCoordInfo[] = [{
     coord: {x: 0, y: 0, z: 0},

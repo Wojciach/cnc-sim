@@ -15,6 +15,8 @@ import { DealWithMovement } from "./dealWithMovement.js";
 import { CheckNecessaryModalsForMovement } from "./checkNecessaryModalsForMovement.js";
 import { chainOfCoordinates } from "./chainOfCoordinates.js";
 import { extractCoordinates } from "./extractCoordinates.js";
+import { updateChainOfCoordinatesDispay } from "./updateChainOfCoordinatesDispay.js";
+import { extractIJKR } from "./extractIJKR.js";
 //import { checkForSpidneRepositionLines } from "./checkForSpidneRepositionLines.js";
 export function runGCode(gCodeString) {
     const allLines = gCodeString.split(";");
@@ -40,8 +42,9 @@ export function runGCode(gCodeString) {
             if (CheckNecessaryModalsForMovement.run(lineWithCommentsRemoved)) {
                 console.log(" - M O V E M E N T  P R O C E S S I N G  A P P R O V E D ! - ");
                 const newCoords = extractCoordinates(lineWithCommentsRemoved);
+                const ijkr = extractIJKR(lineWithCommentsRemoved);
                 if (newCoords !== null) {
-                    chainOfCoordinates.push({ coord: newCoords, ijkr: { i: 0, j: 0, k: 0, r: 0 }, g: modals.G00 });
+                    chainOfCoordinates.push({ coord: newCoords, ijkr: ijkr, g: modals.G00 });
                 }
             }
             ;
@@ -64,6 +67,7 @@ export function runGCode(gCodeString) {
     });
     updateSpindlePosition();
     updateActiveBase();
+    updateChainOfCoordinatesDispay();
     console.log(modals);
     console.log(workCoordinateSystems);
 }

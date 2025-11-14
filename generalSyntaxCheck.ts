@@ -18,5 +18,16 @@ export function generalSyntaxCheck(line: string, index: number): boolean {
         console.log(` - E R R O R :  Too many movement G00/G01/G02/G03 in one line. (${index + 1}) Pelase use only one movmement command in a line ! - `);
         return false;
     }
+
+
+    ['X', 'Y', 'Z', 'I', 'J', 'K', 'R'].forEach((substring) => {
+        const regex = new RegExp(substring, 'gi')
+        if (line.match(regex)?.length! > 1) {
+            console.log(` - E R R O R :  Too many ${substring} coordinates in one line. (${index + 1}) Pelase use only one ${substring} coordinate in a line ! - `);
+            return false;
+        }
+    })
+
+
     return true;
 }
