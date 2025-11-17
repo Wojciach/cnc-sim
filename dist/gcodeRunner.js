@@ -45,6 +45,7 @@ export function runGCode(gCodeString) {
                 const ijkr = extractIJKR(lineWithCommentsRemoved);
                 if (newCoords !== null) {
                     chainOfCoordinates.push({ coord: newCoords, ijkr: ijkr, g: modals.G00 });
+                    updateChainOfCoordinatesDispay(); //moved here from the end of the main function to update after each movement
                 }
             }
             ;
@@ -65,10 +66,11 @@ export function runGCode(gCodeString) {
         if (!SF_CommnadsPrevalidation)
             return;
     });
-    updateSpindlePosition();
+    const lastCrd = chainOfCoordinates.length - 1;
+    const lastCoordinate = chainOfCoordinates[lastCrd].coord;
+    updateSpindlePosition(lastCoordinate);
     updateActiveBase();
-    updateChainOfCoordinatesDispay();
+    //updateChainOfCoordinatesDispay();
     console.log(modals);
-    console.log(workCoordinateSystems);
 }
 //# sourceMappingURL=gcodeRunner.js.map

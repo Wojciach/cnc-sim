@@ -1,6 +1,7 @@
 import { chainOfCoordinates } from "./chainOfCoordinates.js";
 import { ExtractRadius } from "./extractRadius.js";
-function addPathToExistingSVG(svgId, pathData, stroke = "black", strokeWidth = 2, fill = "none") {
+import { checkIfRadNotToSmall } from "./checkIfRadNotToSmall.js";
+function addPathToExistingSVG(svgId, pathData, stroke = "black", strokeWidth = 1, dashed = "none", fill = "none") {
     // Get the existing SVG element
     const svg = document.getElementById("display-svg");
     if (!svg) {
@@ -12,7 +13,9 @@ function addPathToExistingSVG(svgId, pathData, stroke = "black", strokeWidth = 2
     path.setAttribute("d", pathData);
     path.setAttribute("stroke", stroke);
     path.setAttribute("stroke-width", strokeWidth.toString());
-    path.setAttribute("fill", fill);
+    path.setAttribute("stroke-width", strokeWidth.toString());
+    path.setAttribute("stroke-dasharray", dashed);
+    path.setAttribute("fill", 'none');
     svg.appendChild(path);
     console.log("Path added to SVG:", path);
     return path;
@@ -23,10 +26,11 @@ export function updateChainOfCoordinatesDispay() {
         let previousCoord = chainOfCoordinates[index - 1]?.coord || { x: 0, y: 0, z: 0 };
         //let radius = coordinate.ijkr.r;
         let radius = ExtractRadius.getRadius(coordinate);
+        const radOK = checkIfRadNotToSmall(previousCoord, coordinate.coord, radius);
         console.log(" - R A D I U S  F O R  C U R R E N T  A R C : ", radius);
         let cw_ccw = (coordinate.g === 'G02') ? 1 : (coordinate.g === 'G03') ? 0 : null;
         let pathData = `M ${previousCoord.x + 200},${-previousCoord.y + 200}`; // Reset path data
-        if (coordinate.g === 'G02' || coordinate.g === 'G03') {
+        if ((coordinate.g === 'G02' || coordinate.g === 'G03') && radOK) {
             pathData += ` A${radius},${radius} 0 0 ${cw_ccw} ${coordinate.coord.x + 200},${-coordinate.coord.y + 200} `;
         }
         else if (coordinate.g === 'G01' || coordinate.g === 'G00') {
@@ -36,9 +40,10 @@ export function updateChainOfCoordinatesDispay() {
             console.log(" - M L A problem - ");
             return; //skip non-movement coordinates
         }
-        const color = coordinate.g === 'G00' ? 'green' : 'red';
+        const color = coordinate.g === 'G00' ? 'lightgreen' : 'red';
+        const dashed = coordinate.g === 'G00' ? '5,5' : 'none';
         const pathName = "path-" + (index + 1);
-        addPathToExistingSVG(pathName, pathData, color, 5, "none");
+        addPathToExistingSVG(pathName, pathData, color, 2, dashed, "none");
     });
 }
 //# sourceMappingURL=updateChainOfCoordinatesDispay.js.map

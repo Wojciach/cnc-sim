@@ -1,12 +1,16 @@
 import { spindlePositon, modals, workCoordinateSystems } from './modals.js';
+import { chainOfCoordinates } from './chainOfCoordinates.js';
 export const setActiveModalFunctions = (element) => {
+    const lastOne = chainOfCoordinates.length - 1;
+    const lastCoordinateFromTheChain = chainOfCoordinates[lastOne].coord;
     const position = document.querySelector('#position');
     const xElement = position?.querySelector('#x');
-    xElement.textContent = spindlePositon.current.x.toString();
+    xElement.textContent = lastCoordinateFromTheChain.x.toString();
     const yElement = position?.querySelector('#y');
-    yElement.textContent = spindlePositon.current.y.toString();
+    yElement.textContent = lastCoordinateFromTheChain.y.toString();
     const zElement = position?.querySelector('#z');
-    zElement.textContent = spindlePositon.current.z.toString();
+    zElement.textContent = lastCoordinateFromTheChain.z.toString();
+    console.log(lastCoordinateFromTheChain);
     const nextPosition = document.querySelector('#next-position');
     const xElement2 = nextPosition?.querySelector('#x');
     xElement2.textContent = spindlePositon.next.x.toString();
@@ -14,7 +18,7 @@ export const setActiveModalFunctions = (element) => {
     yElement2.textContent = spindlePositon.next.y.toString();
     const zElement2 = nextPosition?.querySelector('#z');
     zElement2.textContent = spindlePositon.next.z.toString();
-    updateSpindlePosition();
+    updateSpindlePosition(lastCoordinateFromTheChain);
 };
 export function updateActiveBase() {
     const x = document.querySelector('#active-base-indicator #x');
@@ -27,11 +31,11 @@ export function updateActiveBase() {
         z.textContent = workCoordinateSystems[activeBase].z.toString();
     }
 }
-export function updateSpindlePosition() {
+export function updateSpindlePosition(coord) {
     const activeBase = document.getElementById('active-base');
     if (activeBase) {
-        activeBase.setAttribute('cx', (200 + spindlePositon.current.x).toString());
-        activeBase.setAttribute('cy', (200 - spindlePositon.current.y).toString());
+        activeBase.setAttribute('cx', (200 + coord.x).toString());
+        activeBase.setAttribute('cy', (200 - coord.y).toString());
         document.getElementById('g').textContent = modals.G54 ? modals.G54 : "none";
     }
 }

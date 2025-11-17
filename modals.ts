@@ -107,7 +107,7 @@ type SpindlePosition = {
 };
 
 export const spindlePositon: SpindlePosition = {
-    current: {x: 0.1, y: 20, z: 1},
+    current: {x: 0, y: 0, z: 0},
     next: {x: 0, y: 0, z: 0}
 };
 

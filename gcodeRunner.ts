@@ -48,6 +48,7 @@ export function runGCode(gCodeString: string): void {
                 const ijkr = extractIJKR(lineWithCommentsRemoved);
                 if(newCoords !== null) {
                     chainOfCoordinates.push({coord: newCoords, ijkr: ijkr, g: modals.G00});
+                    updateChainOfCoordinatesDispay(); //moved here from the end of the main function to update after each movement
                 }
             };
             console.log(" - E N D  O F  M O V E M E N T  P R O C E S S I N G ! - ");
@@ -76,9 +77,10 @@ export function runGCode(gCodeString: string): void {
         
 
     });
-    updateSpindlePosition();
+    const lastCrd = chainOfCoordinates.length - 1;
+    const lastCoordinate =  chainOfCoordinates[lastCrd]!.coord
+    updateSpindlePosition(lastCoordinate);
     updateActiveBase();
-    updateChainOfCoordinatesDispay();
+    //updateChainOfCoordinatesDispay();
     console.log(modals);
-    console.log(workCoordinateSystems);
 }

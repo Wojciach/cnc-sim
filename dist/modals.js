@@ -54,7 +54,7 @@ export function createDefaultModals() {
 }
 export const modals = createDefaultModals();
 export const spindlePositon = {
-    current: { x: 0.1, y: 20, z: 1 },
+    current: { x: 0, y: 0, z: 0 },
     next: { x: 0, y: 0, z: 0 }
 };
 export const workCoordinateSystems = {
