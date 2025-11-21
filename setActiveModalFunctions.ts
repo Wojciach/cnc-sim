@@ -1,7 +1,7 @@
 import {spindlePositon, modals, workCoordinateSystems, type Coordinate } from './modals.js';  
 import { chainOfCoordinates } from './chainOfCoordinates.js';
 
-export const setActiveModalFunctions = (element: HTMLElement): void => {
+export const displaySpindlePositionCoords = (): void => {
     const lastOne = chainOfCoordinates.length -1
     const lastCoordinateFromTheChain = chainOfCoordinates[lastOne]!.coord;
 
@@ -44,7 +44,7 @@ export function updateActiveBase() {
 }
 
 export function updateSpindlePosition(coord: Coordinate) {
-    const activeBase = document.getElementById('active-base');
+    const activeBase = document.getElementById('tool-representation');
     if(activeBase) {
         activeBase.setAttribute('cx', (200 + coord.x).toString());
         activeBase.setAttribute('cy', (200 - coord.y).toString());

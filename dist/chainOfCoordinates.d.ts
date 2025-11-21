@@ -4,7 +4,7 @@ export type ijkr = {
     j: number;
     k: number;
     r: number;
-};
+} | null;
 export type fullCoordInfo = {
     coord: Coordinate;
     ijkr: ijkr;

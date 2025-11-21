@@ -1,22 +1,18 @@
-import { updateActiveBase, updateSpindlePosition } from "./setActiveModalFunctions.js";
+import { updateActiveBase, updateSpindlePosition, displaySpindlePositionCoords } from "./setActiveModalFunctions.js";
 import { singleCommandRunner } from "./singleCommandRunner.js";
 import { checkForG10 } from "./checkForG10.js";
-import { checkForG43 } from "./checkForG43.js";
-import { checkForG41_G42 } from "./checkForG41_G42.js";
 import { DealWithG41_G42 } from "./dealWithG41_G42.js";
-import { lineValidation } from "./lineVlidation.js";
-import { modals, workCoordinateSystems } from "./modals.js";
+import { modals } from "./modals.js";
 import { FS_CommnadsPrevalidation } from "./FS_CommandsPrevalidation.js";
-import { checkForMovement } from "./checkForMovement.js";
 import { generalSyntaxCheck } from "./generalSyntaxCheck.js";
-import { runAutonomusModals } from "./runAutonomusModals.js";
-import { checkForNecessaryModals } from "./checkForNecessaryModals.js";
 import { DealWithMovement } from "./dealWithMovement.js";
 import { CheckNecessaryModalsForMovement } from "./checkNecessaryModalsForMovement.js";
 import { chainOfCoordinates } from "./chainOfCoordinates.js";
 import { extractCoordinates } from "./extractCoordinates.js";
 import { updateChainOfCoordinatesDispay } from "./updateChainOfCoordinatesDispay.js";
 import { extractIJKR } from "./extractIJKR.js";
+import { extractAndCheckIJKR } from "./extractAndCheckIJKR.js";
+import type { Coordinate } from "./modals.js";
 //import { checkForSpidneRepositionLines } from "./checkForSpidneRepositionLines.js";
 
 export function runGCode(gCodeString: string): void {
@@ -44,8 +40,10 @@ export function runGCode(gCodeString: string): void {
         if(movementDetected) {
             if (CheckNecessaryModalsForMovement.run(lineWithCommentsRemoved)) {
                 console.log(" - M O V E M E N T  P R O C E S S I N G  A P P R O V E D ! - ");
-                const newCoords = extractCoordinates(lineWithCommentsRemoved);
-                const ijkr = extractIJKR(lineWithCommentsRemoved);
+                const oldCoords: Coordinate = chainOfCoordinates[chainOfCoordinates.length -1]!.coord;
+                const newCoords: Coordinate | null = extractCoordinates(lineWithCommentsRemoved);
+               // const ijkr = extractIJKR(lineWithCommentsRemoved);
+                const ijkr = extractAndCheckIJKR.run(lineWithCommentsRemoved, oldCoords, modals.G00);
                 if(newCoords !== null) {
                     chainOfCoordinates.push({coord: newCoords, ijkr: ijkr, g: modals.G00});
                     updateChainOfCoordinatesDispay(); //moved here from the end of the main function to update after each movement
@@ -80,6 +78,7 @@ export function runGCode(gCodeString: string): void {
     const lastCrd = chainOfCoordinates.length - 1;
     const lastCoordinate =  chainOfCoordinates[lastCrd]!.coord
     updateSpindlePosition(lastCoordinate);
+    displaySpindlePositionCoords()
     updateActiveBase();
     //updateChainOfCoordinatesDispay();
     console.log(modals);

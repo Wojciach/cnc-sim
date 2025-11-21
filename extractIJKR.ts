@@ -28,10 +28,10 @@ export function extractIJKR(line: string): ijkr {
     }
 
     ijkMatches?.forEach((match) => {
-        const axis = match.charAt(0).toUpperCase();
+        const axis = match.charAt(0).toLowerCase() as keyof typeof ijkrValues;
         const valueString = match.substring(1).trim();
         const valueNumber = Number(parseFloat(valueString));
-        ijkrValues[axis.toLowerCase() as keyof ijkr] = valueNumber;
+        ijkrValues[axis] = valueNumber;
         console.log(` - ${axis}  V A L U E  E X T R A C T E D  : `, valueNumber);
     })
 

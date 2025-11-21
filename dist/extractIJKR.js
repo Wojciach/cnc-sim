@@ -22,10 +22,10 @@ export function extractIJKR(line) {
         console.log(" - N O  R  V A L U E  D E T E C T E D  I N  L I N E . - ");
     }
     ijkMatches?.forEach((match) => {
-        const axis = match.charAt(0).toUpperCase();
+        const axis = match.charAt(0).toLowerCase();
         const valueString = match.substring(1).trim();
         const valueNumber = Number(parseFloat(valueString));
-        ijkrValues[axis.toLowerCase()] = valueNumber;
+        ijkrValues[axis] = valueNumber;
         console.log(` - ${axis}  V A L U E  E X T R A C T E D  : `, valueNumber);
     });
     return ijkrValues;

@@ -1,7 +1,7 @@
 import { addDefaultModals } from './addDefaultModals.js';
 import { runGCode } from './gcodeRunner.js';
 import { modals, createDefaultModals } from './modals.js';
-import { setActiveModalFunctions } from "./setActiveModalFunctions.js";
+import { displaySpindlePositionCoords } from "./setActiveModalFunctions.js";
 class Website {
     constructor() {
         this.counterValue = 0;
@@ -31,7 +31,7 @@ class Website {
         this.setupEventListeners();
         this.setupNavbar();
         addDefaultModals(this.elements.modalFunctions);
-        setActiveModalFunctions(this.elements.modalFunctions);
+        displaySpindlePositionCoords();
     }
     setupEventListeners() {
         // Setup counter buttons

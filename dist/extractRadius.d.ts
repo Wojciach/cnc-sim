@@ -1,6 +1,6 @@
-import type { fullCoordInfo } from "./chainOfCoordinates.js";
+import type { ijkr } from "./chainOfCoordinates.js";
 export declare class ExtractRadius {
-    static getRadius(coord: fullCoordInfo): number;
+    static getRadius(coord: ijkr): number;
     private static getRadiusFromIJK;
     private static checkForIJKvsRConflict;
     private static atLeastOneValueBigEnough;

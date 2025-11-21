@@ -2,7 +2,7 @@ import { addDefaultModals } from './addDefaultModals.js';
 import { runGCode } from './gcodeRunner.js';
 import { modals, createDefaultModals } from './modals.js';
 import type { Modals } from './modals.js';
-import { setActiveModalFunctions }from "./setActiveModalFunctions.js";
+import { displaySpindlePositionCoords  }from "./setActiveModalFunctions.js";
 // script.ts - TypeScript source file
 interface CounterElements {
     decrement: HTMLElement | null;
@@ -49,7 +49,7 @@ class Website {
         this.setupEventListeners();
         this.setupNavbar();
         addDefaultModals(this.elements.modalFunctions!);
-        setActiveModalFunctions(this.elements.modalFunctions!);
+        displaySpindlePositionCoords();
     }
 
     private setupEventListeners(): void {
